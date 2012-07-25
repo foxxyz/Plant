@@ -1,0 +1,37 @@
+/*
+
+Basic Styles for the Compost Plugin for Plant
+
+Created by: 	Ivo Janssen
+For:		Code Dealers
+		Plant
+
+*/
+
+#content {
+	width: 500px;
+}
+
+#subnavigation {
+	float: right;
+	width: 180px;
+	padding-bottom: 30px;
+}
+
+	#subnavigation fieldset {
+		padding-bottom: 0;
+		padding-top: 0;
+	}
+
+		#subnavigation #search .submit {
+			margin-left: 30px;
+			font-size: 12px;
+		}
+
+		#subnavigation #search_query_container input {
+			width: 100px;
+		}
+		
+		#subnavigation #search_query_container label {
+			display: none;
+		}

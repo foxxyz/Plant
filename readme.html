@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Plant Installation Guide</title>
+		<base href="/" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="author" content="Ivo KH Janssen, http://codedealers.com" />
+		<meta name="copyright" content="Copyright 2007-present Ivo KH Janssen, Code Dealers" />
+		<link rel="stylesheet" href="/app/css/main.css" type="text/css" />
+	</head>
+	<body>
+		<h1>Plant</h1>
+		
+		<div id="wrapper">
+			<h2>Plant Installation Guide</h2>	
+			
+			<h3>Welcome To The Greenhouse!</h3>
+			
+			<p>
+				Thanks for trying out Plant! This has been one of my biggest projects to date, and also the one of which I am most proud of.
+				For me the main reason to make this framework was to make building a site fun again, regardless of scale. I hope Plant will give you as much joy as it did me.
+			</p>
+			
+			<h3>System Requirements</h3>
+			
+			<p>
+				To make the most flexible system possible, I've embraced some of the more recent technologies available. If your host doesn't provide these, urge them to upgrade!
+			</p>
+			<ul>
+				<li><strong>Apache 1.3</strong> or higher</li>
+				<li><strong>PHP 5.2</strong> or higher</li>
+				<li><strong>MySQL 4.0</strong> or higher</li>
+				<li>The <strong>mod_rewrite</strong> module installed for Apache</li>
+			</ul>
+			
+			<h3>Starting Out</h3>
+					
+			<ol>
+				<li><strong>Unzip</strong> the package into its own directory</li>
+				<li><strong>Modify</strong> <code>config.local.inc.php</code> in the <code>/app/config/</code> directory and fill in the details of your database connection.</li>
+				<li><strong>Upload</strong> all the files to your web server!</li>
+				<li>
+					<strong>Set</strong> write permissions on the following directories so Plant can access data:
+					<ul>
+						<li><code>/app/controllers/</code></li>
+						<li><code>/app/templates/</code></li>
+						<li><code>/core/cache/</code></li>
+						<li><code>/content/</code></li>
+					</ul>
+				</li>
+				<li><strong>Run</strong> <code><a href="/install/">/install/</a></code> on your site. Follow the steps, and note the generated password at the end.</li>
+				<li><strong>Delete</strong> the <code>/install/</code> directory on your server.</li>
+			</ol>
+			
+			<p>
+				That's it! The installation script will send you to the Site Admin where you'll be able to change your password and start constructing your site.
+			</p>
+			
+			<h3>Random Stuff You Might Need</h3>
+			
+			<ul>
+				<li>The official site for Plant can be found at <a href="http://codedealers.com/projects/plant/">http://codedealers.com/projects/plant/</a>.
+				<li>View <a href="changelog.html">the changelog</a> to check what's changed since the last version.</li>
+			</ul>
+									
+			<h3>OK, That's Really It</h3>
+			
+			<p>
+				Enjoy!
+			</p>
+					
+			<h3>Copyright Crap & Thanks</h3>
+			
+			<ul>
+				<li>All Plant code & content (with the exceptions below) is copyright (c) 2007-present Ivo Janssen. Plant is released under the <abbr title="GNU Public License">GPL</abbr> (read <a href="license.txt">license.txt</a> or the <a href="http://codedealers.com/projects/plant/license/">online license</a> for more info).</li>
+				<li>jQuery Javascript Framework is copyright (c) 2007 John Resig, licensed under an <a href="http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt" title="GNU Public License">GPL license</a>. Visit <a href="http://jquery.com">http://jquery.com</a></li>
+				<li>The PHP class autoloading mechanism is based on original work by Tobias Demuth.</li>
+			</ul>
+			
+			<p>
+				Thanks to everyone who supports Plant and the people whose names I didn't mention.
+			</p>
+		</div>
+	</body>
+</html>

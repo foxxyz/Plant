@@ -1,0 +1,420 @@
+/*
+
+Filebrowser Styles for the Compost Plugin for Plant
+
+Created by: 	Ivo Janssen
+For:		Code Dealers
+		Plant
+
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	position: relative;
+	overflow: hidden;
+}
+
+fieldset {
+	border: 0;
+}
+
+legend {
+	display: none;
+}
+
+h2 {
+	letter-spacing: 3px;
+	text-transform: lowercase;
+	font-variant: small-caps;
+	font-family: "Times New Roman", serif;
+	width: 300px;
+	float: left;
+}
+
+ul {
+	list-style: none;
+}
+
+#content {
+	position: absolute;
+	left: 200px;
+	padding-top: 5px;
+	height: 575px;
+	overflow: auto;
+}
+
+#header {
+	background-color: #444;
+	color: #fff;
+	padding: 0 10px 0;
+	height: 30px;	
+}
+
+	#header h4 {
+		display: none;
+	}
+
+	#header .actions {
+		font-size: 10px;
+	}
+	
+		#header .actions ul {
+			position: absolute;
+			top: 4px;
+			right: 2px;
+			}
+
+		#header .actions li {
+			float: right;
+			margin-left: 5px;
+			display: block;
+		}
+	
+			#header .actions li input, #header .actions li a, .submit input {
+				font-size: 10px;
+				color: #fff;
+				background-color: #666;
+				border: 2px outset #666;
+				padding: 0 5px;
+				line-height: 16px;
+				display: block;
+				text-decoration: none;
+			}
+	
+				#header .actions li input:hover, #header .actions li a:hover, .submit input:hover {
+					border-style: inset;
+				}
+				
+	#header #pagination {
+		border-right: 4px double #666666;
+		padding-right: 5px;
+		right: 135px;
+		top: 6px;
+		width: 200px;
+	}
+
+
+		#header #pagination a {
+			padding: 0;
+			line-height: auto;
+			background-color: inherit;
+			border: none;
+		}
+		
+			#header #pagination a:hover {
+				text-decoration: underline;
+			}
+			
+		#header #pagination li {
+			padding: 0 5px;
+			}
+
+#details {
+	position: absolute;
+	left: 0;
+	top: 30px;
+	width: 200px;
+	background-color: #eee;
+	color: inherit;
+	height: 580px;
+	overflow: auto;
+}
+
+		#details fieldset div {
+			padding: 5px;
+		}
+
+	#details h3 {
+		font-variant: small-caps;
+		text-transform: lowercase;
+		font-weight: normal;
+		color: #444;
+		background-color: inherit;
+		margin: 5px 0;
+		padding: 2px 5px;
+		font-size: 12px;
+		border-bottom: solid 1px #ccc;
+	}
+	
+	#details p {
+		padding: 10px;
+	}
+	
+#fileinfo {
+	padding: 5px;
+	margin: 0 5px 5px;
+	background-color: #f4f4f4;
+	color: inherit;
+}
+
+	#fileinfo h5 {
+		font-size: 14px;
+		width: 180px;
+		overflow: hidden;
+		margin-bottom: 5px;
+	}
+
+	#fileinfo p {
+		margin: 0;
+		font-size: 10px;
+		padding: 0;
+	}
+	
+#fileoptions {
+	display: none;
+	margin: 0 5px;
+}
+
+	#fileoptions input {
+		background-color: #eee;
+		border: 2px solid #fff;
+		float: left;
+		font-size: 12px;
+		height: 30px;
+		margin-right: 4px;
+		padding: 0 3px;
+	}
+	
+	#fileoptions input:hover {
+		background-color: #444;
+		border-color: #000;
+		color: #fff;
+	}
+
+#upload_form {
+	position: absolute;
+	top: 110px;
+	left: 210px;
+	background-color: #999;
+	border: solid 1px #000;
+	width: 320px;
+	padding: 0 30px;
+	height: 340px;
+	text-align: center;
+	z-index: 10;
+}
+
+	#upload_form div {
+		margin-bottom: 2px;
+		}
+
+	#upload_form h3 {
+		font-size: 20px;
+		padding: 10px;
+	}
+
+	#upload_form .close {
+		position: absolute;
+		right: 5px;
+		top: 2px;
+		cursor: pointer;
+	}
+	
+		#upload_form .close:hover {
+			text-decoration: underline;
+		}
+	
+	#upload_form .submit {
+		padding-top: 15px;
+	}
+
+#uploadqueue {
+	background-color: #f4f4f4;
+	color: inherit;
+	margin: 4px;
+	overflow: auto;
+	max-height: 200px;
+}
+
+	#uploadqueue > div {
+		border-bottom: solid 1px #fff;
+		font-size: 10px;
+		padding: 2px 4px 6px;
+		position: relative;
+	}
+	
+	#uploadqueue .cancel {
+		position: absolute;
+		right: 2px;
+		top: 2px;
+		height: 5px;
+		width: 5px;
+	}
+
+		#uploadqueue .cancel a, #uploadqueue .cancel img {
+			display: block;
+			background: url(/plugins/compost/css/images/upload-cancel.png) no-repeat center center;
+			text-indent: -9000px;
+		}
+	
+	#uploadqueue .fileName {
+		display: block;
+		padding-right: 3px;
+		height: 13px;
+		overflow: hidden;
+	}
+	
+	#uploadqueue .percentage {
+		position: absolute;
+		left: 0;
+		bottom: 5px;
+		color: #fff;
+		background-color: transparent;
+	}
+	
+	#uploadqueue .uploadify-error .uploadify-progress-bar {
+		background-color: #DC1838;
+		color: inherit;
+	}
+	
+	#uploadqueue .uploadify-progress {
+		width: 100%;
+		background-color: #ddd;
+	}
+
+	#uploadqueue .uploadify-progress, #uploadqueue .uploadify-progress-bar {
+		height: 12px;
+	}
+	
+	#uploadqueue .uploadify-progress-bar {
+		background-color: #B6DEA8;
+		color: inherit;
+		width: 0;
+	}
+
+p.status, ul.status li, p.error, ul.error li {
+	padding: 5px 10px !important;
+	color: #222;
+	background-color: inherit;
+	font-weight: bold;
+	margin: 5px 5px 0;
+	border-style: solid;
+	border-width: 2px;
+}
+
+p.error, .error li {
+	background-color: #fcc !important;
+	color: inherit;
+	border-color: #f88;
+}
+
+.encodingtime {
+	display: block;
+	text-align: center;
+	width: 140px;
+	position: absolute;
+	top: 5px;
+	left: 0;
+}
+
+	.encodingtime .timer {
+		font-size: 16px;
+		display: block;
+	}
+
+.item {
+	display: block;
+	float: left;
+	height: 140px;
+	width: 140px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	font-size: 10px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: relative;
+	color: inherit;
+	background-color: #eee;
+	background-image: url(/plugins/compost/css/images/file.png);
+}
+	
+	.item:hover, .item.selected {
+		background-color: #eee;
+		color: inherit;
+	}
+
+		.item:hover .tools, .item:hover .name, .item.selected .tools, .item.selected .name {
+			display: block;
+		}
+		
+		.item.selected .name {
+			opacity: 1;
+			background-color: #7B4545;
+			color: #fff;
+		}
+
+	.item .name {
+		position: absolute;
+		bottom: 3px;
+		left: 5px;
+		width: 126px;
+		background-color: #fff;
+		height: 1em;
+		padding: 0 2px 3px;
+		opacity: .8;
+		overflow: hidden;
+		display: block;
+		white-space: nowrap;
+		display: none;
+	}
+
+	.item .tools, .item .size, .item .filesize {
+		display: none;
+	}
+
+		.item .tools .delete {
+			position: absolute;
+			top: 3px;
+			right: 3px;
+			width: 12px;
+			height: 12px;
+		}
+
+			.item .tools .delete a {
+				display: block;
+				background-image: url(/plugins/compost/css/images/delete-icon.png);
+				background-position: top right;
+				background-repeat: no-repeat;
+				text-indent: -9000px;
+				width: 12px;
+				height: 12px;
+				opacity: .6;
+			}
+
+				.item .tools .delete a:hover {
+					opacity: 1;
+				}
+				
+	.item .type {
+		display: none;
+	}
+
+.screen {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	color: inherit;
+	opacity: .6;
+}
+
+.status {
+	background-color: #cfc !important;
+	color: inherit;
+	border-color: #8f8;
+}
+
+.mp3, .wav, .flac, .wma {
+	background-image: url(/plugins/compost/css/images/audio.png);
+}
+
+.mov, .flv, .wmv, .avi, .mp4, .mpg, .mpeg {
+	background-image: url(/plugins/compost/css/images/video.png);
+}

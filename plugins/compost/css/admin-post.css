@@ -1,0 +1,148 @@
+/*
+
+Additional Admin Styles for the Compost Plugin for Plant
+
+Created by: 	Ivo Janssen
+For:		Code Dealers
+		Plant
+
+*/
+
+	.quotetype textarea {
+		font-size: 38px;
+		margin-bottom: 40px;
+		height: 200px;
+	}
+
+textarea {
+	display: block;
+	width: 600px;
+}
+
+th {
+	display: none;
+}
+	
+	.comments > li {
+		list-style: none;
+		position: relative;
+		padding-top: 2em;
+		padding-bottom: 3em;
+		padding-left: 1em;
+		display: block;
+	}
+	
+	.comments p {
+		margin-left: 0;
+		font-size: 1.1em;
+	}
+	
+	.comments small {
+		clear: left;
+		display: block;
+		font-size: .7em;
+	}
+
+	.comments .author {
+		margin-bottom: 1em;
+	}
+	
+		.comments .author strong {
+			font-size: 1.3em;
+		}
+	
+	.comments .options {
+		list-style: none;
+		margin-left: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		background-color: #DBE3D5;
+		color: inherit;
+	}
+	
+		.comments .options li {
+			float: right;
+			display: block;
+			font-size: .7em;
+			font-weight: bold;
+			border-left: 2px solid #fff;
+		}
+		
+			.comments .options li a {
+				display: block;
+				width: 7em;
+				text-align: center;
+				text-decoration: none;
+				line-height: 2em;
+				color: #729D6D;
+				background-color: #DBE3D5;
+			}
+	
+			.comments .delete a:link, .comments .delete a:visited {
+				
+			}
+			
+			.comments .delete a:hover, .comments .delete a:active, .comments .delete a:focus {
+				background-color: #D03030;
+				color: #fff;
+			}
+			
+			.comments .approve a:link, .comments .approve a:visited {
+				
+			}
+			
+			.comments .approve a:hover, .comments .approve a:active, .comments .approve a:focus {
+				background-color: #A3C78B;
+				color: #fff;
+			}
+			
+		.comments .options .next {
+			float: right;
+			font-weight: normal;
+		}
+			
+	.messages {
+		height: 80px;
+	}
+
+#delete_action_move_category_container {
+	display: inline;
+}
+
+#ed_toolbar {
+	margin-bottom: 0;
+}
+
+	#ed_toolbar input {
+		font-size: 12px;
+		padding: 0 5px;
+		border: outset 1px #ccc;
+		background-color: #fff;
+		color: inherit;
+	}
+	
+		#ed_toolbar input:hover {
+			border-style: inset;
+			cursor: pointer;
+		}
+	
+	#ed_toolbar #ed_bold {
+		font-weight: bold;
+	}
+	
+	#ed_toolbar #ed_italic {
+		font-style: italic;
+	}
+	
+	#ed_toolbar #ed_link {
+		color: #f00;
+		background-color: inherit;
+	}
+	
+	.subnavigation a.active {
+		color: #607452;
+		background-color: inherit;
+		text-decoration: underline;
+		}

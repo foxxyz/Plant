@@ -52,13 +52,14 @@
 		 * @param string $name Name of this set. Will be used in naming the image files
 		 * @param array $sizes A standard size. For format syntax, see {@link EditableImageModel}.
 		 * @param string $basePath The base path to which names and extensions will be added (EG <kbd>content/products/jacket</kbd>)
+		 * @param bool $nameModifier Whether to modify the basePath with the set name (when not "main") [true|false]
 		 * @return ImageSet
 		 * @uses Image
 		 * @uses ImageSet::$images
 		 * @uses ImageSet::$name
 		 * @uses getName()
 		 */
-		public function __construct($name, $sizes, $basePath) {
+		public function __construct($name, $sizes, $basePath, $nameModifier = true) {
 			
 			// Check arguments
 			if (!is_string($name) || !$name) throw new Exception("Name must be a valid string!");
@@ -80,7 +81,7 @@
 				
 				// Create append path
 				$path = "";
-				if ($this->getName() != "main") $path .= "-" . $this->getName();
+				if ($this->getName() != "main" && $nameModifier) $path .= "-" . $this->getName();
 				if ($sizeName != "regular") $path .= "-" . $sizeName;
 				$path .= "." . $extension;				
 				
@@ -124,7 +125,6 @@
 		 */
 		public function exists() {
 		
-			if (!$this->get(false)) return false;
 			return $this->get(false)->exists();
 						
 		}
@@ -247,6 +247,12 @@
 				else if (isset($image["maxHeight"]) && $sourceImage->height() > $image["maxHeight"]) $sourceImage->resize(false, $image["maxHeight"]);
 				// Resize/crop/fit for set widths/heights
 				else if (isset($image["width"]) && isset($image["height"])) {
+					
+					// Check if the width and height are correct already and pass it on through (perfect for animated gifs)
+					if ($image["width"] == $sourceImage->width() && $image["height"] == $sourceImage->height() && ($sourceFile->getType() == $image["image"]->getType() || $sourceFile->getType() == "gif") && is_uploaded_file($sourceFile->getURL("local", false))) {
+						if (!move_uploaded_file($sourceFile->getURL("local", false), $image["image"]->getURL("local", false))) $sourceFile->rename($image["image"]->getURL("local", false));
+						continue;
+					}
 					
 					// Ratio calculations
 					$cropRatio = $image["width"] / $image["height"];

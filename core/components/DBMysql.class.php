@@ -15,7 +15,7 @@
 	 * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
 	 * @package plant_core
 	 * @subpackage components
-	 * @version 1.1
+	 * @version 1.2
 	 */
 	class DBMysql extends DB {
 
@@ -192,6 +192,14 @@
 			if (!is_resource($res) && !is_bool($res)) throw new DBException("Can't fetch rows from an invalid resource");
 			if (is_resource($res)) return mysql_num_rows($res);
 			else return mysql_affected_rows();
+		}
+		
+		/**
+		 * String escaper
+		 * @see DB::escape()
+		 */
+		protected function _escape($string) {
+			return mysql_real_escape_string($string);
 		}
 		
 		/**

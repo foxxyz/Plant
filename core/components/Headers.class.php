@@ -20,7 +20,7 @@
 	 * @uses RELATIVE_SITE_ROOT Appendix to root URL; gets set automatically by init.inc.php
 	 * @uses REMOTE_SITE_ROOT Root URL site; gets set automatically by init.inc.php
 	 * @uses Session
-	 * @version 1.1
+	 * @version 1.2
 	 */
 	class Headers {
 
@@ -29,10 +29,11 @@
 		 *
 		 * @param string $key The header key to add
 		 * @param string $value The header value to add
+		 * @param int $HTTPCode Force use a HTTP Response code (header will default to 302)
 		 * @return void
 		 */
-		public static function addHeader($key, $value) {
-			header("$key: $value");
+		public static function addHeader($key, $value, $HTTPCode = false) {
+			header("$key: $value", true, $HTTPCode);
 		}
 
 		/**
@@ -40,6 +41,7 @@
 		 * 
 		 * @param string $url The URL to redirect to (can start with <kbd>http://</kbd> or just with <kbd>/</kbd>)
 		 * @param bool|string $secure TRUE forces the URL to <kbd>https://</kbd> (secure), FALSE forces non-secure. Use <kbd>persist</kbd> to leave as is.
+		 * @param bool $permanent TRUE signifies a permanent redirect
 		 * @return void
 		 * @uses RELATIVE_SITE_ROOT
 		 * @uses REMOTE_SITE_ROOT
@@ -47,7 +49,7 @@
 		 * @uses addHeader()
 		 * @uses config()
 		 */
-		public static function redirect($url = "", $secure = "persist") {
+		public static function redirect($url = "", $secure = "persist", $permanent = false) {
 						
 			// Replace secure with non-secure and vice-versa if necessary
 			$currentRoot = parse_url(config("REMOTE_SITE_ROOT"));
@@ -70,7 +72,7 @@
 			Session::save();
 			
 			// Redirect that shit
-			Headers::addHeader("Location", $url);
+			Headers::addHeader("Location", $url, $permanent == true ? 301 : false);
 			
 			// And kill it
 			die();

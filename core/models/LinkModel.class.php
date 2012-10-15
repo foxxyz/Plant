@@ -18,7 +18,7 @@
 	 * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
 	 * @package plant_core
 	 * @subpackage models
-	 * @version 1.3
+	 * @version 1.4
 	 * @uses LINK_TABLE_PREFIX Prefix to link tables (usually 'link')
 	 * @uses LINK_TABLE_SEPERATOR Seperator between terms in link table names (usually '_')
 	 */
@@ -43,19 +43,19 @@
 		 * @return LinkModel
 		 * @uses createTableName()
 		 * @uses getIDField()
-		 * @uses getTableName()
+		 * @uses getModelType()()
 		 * @uses LinkModel::$DBCols
 		 * @uses LinkModel::$DBTable
 		 */
 		public function __construct(Model $model1, Model $model2, $data = false) {
 		
 			// Create variable names
-			$model1ID = $model1->getTableName() . "_" . $model1->getIDField();
-			$model2ID = $model2->getTableName() . "_" . $model2->getIDField();
+			$model1ID = $model1->getModelType() . "_" . $model1->getIDField();
+			$model2ID = $model2->getModelType() . "_" . $model2->getIDField();
 		
 			// Set structure
-			$this->DBCols[$model1ID] = array("type" => "int", "linkedModel" => $model1->getTableName());
-			$this->DBCols[$model2ID] = array("type" => "int", "linkedModel" => $model2->getTableName());
+			$this->DBCols[$model1ID] = array("type" => "int", "linkedModel" => $model1->getModelType());
+			$this->DBCols[$model2ID] = array("type" => "int", "linkedModel" => $model2->getModelType());
 			
 			// Set data
 			$this->$model1ID = $model1->getID();

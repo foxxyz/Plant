@@ -22,7 +22,7 @@
 	 * @uses DB_PASS Password for DB_USER
 	 * @uses DB_USER Username to log in on DB_HOST
 	 * @uses DEFAULT_DB_TYPE Default datatype to use in case none specifiedshould be set to 'mysql' unless an extended wrapper has been written
-	 * @version 1.5
+	 * @version 1.6
 	 */
 	abstract class DB {
 		
@@ -116,6 +116,19 @@
 			// Get singleton and do creation
 			$DB =& DB::connect();
 			return $DB->createNew($name);
+		}
+		
+		/**
+		 * Escape a variable to insert in a query
+		 *
+		 * @param string $string The string to escape
+		 * @return string Safe string ready for database insertion
+		 */
+		public static function escape($string) {
+			
+			$DB =& DB::instance();
+			return $DB->_escape($string);
+			
 		}
 		
 		/**
@@ -247,6 +260,14 @@
 			$db->type = $type;
 			return $db;
 		}
+		
+		/**
+		 * Type specific function to escape a variable to insert in a query
+		 *
+		 * @param string $string The string to escape
+		 * @return string Safe string ready for database insertion
+		 */
+		abstract protected function _escape($string);
 		
 		/**
 		 * Type specific function to build a query from a given number of components

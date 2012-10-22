@@ -17,7 +17,7 @@
 	 * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
 	 * @package plant_core
 	 * @subpackage controllers
-	 * @version 1.1
+	 * @version 2.0
 	 */
 	class ErrorController extends Controller {
 		
@@ -28,7 +28,7 @@
 		 */
 		public function action403() {
 			$this->setTitle("403 Forbidden");
-			header("HTTP/1.0 403 Forbidden"); 
+			header($_SERVER["SERVER_PROTOCOL"] . " 403 Forbidden"); 
 		}
 		
 		/**
@@ -39,7 +39,17 @@
 		 */
 		public function action404() {
 			$this->setTitle("404 Not Found");
-			header("HTTP/1.0 404 Not Found"); 
+			header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found"); 
+		}
+		
+		/**
+		 * Invoke 500 Internal Server Error
+		 *
+		 * @return void
+		 */
+		public function action500() {
+			$this->setTitle("500 Internal Server Error");
+			header($_SERVER["SERVER_PROTOCOL"] . " 500 Internal Server Error"); 
 		}
 		
 		/**

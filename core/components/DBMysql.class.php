@@ -232,7 +232,7 @@
 			if (!is_string($pass)) throw new Exception("Password argument is not a string");
 			
 			// Try connecting
-			if (!$this->connection = @mysql_connect($host, $user, $pass)) throw new DBException("Couldn't connect to MySQL database! Check the database configuration in /app/config/config.local.inc!", -1);
+			if (!$this->connection = @mysql_connect($host, $user, $pass)) throw new DBException("Couldn't connect to MySQL database! MySQL says: " . mysql_error() . " Check the database configuration in /app/config/config.local.inc!", -1);
 			
 			// Set character set to UTF8
 			mysql_query("SET CHARACTER SET 'utf8'");

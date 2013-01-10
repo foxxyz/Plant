@@ -171,7 +171,7 @@
 	define("LOGIN_COOKIE_NAME", "PlantCookie");
 	
 	// How deep the Model linking system keeps linking using the same data
-	define("MODEL_LINKING_DEPTH", 1);
+	define("MODEL_LINKING_DEPTH", 2);
 	
 	// Amount of times the built-in Model tokenizer tries to make a token before giving up
 	define("MODEL_TOKENIZER_MAX_TRIES", 50);

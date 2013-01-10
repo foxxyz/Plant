@@ -147,4 +147,30 @@
 		return $siteRoots;
 	}
 
+	/**
+	 * Determine the actual client's IP address
+	 *
+	 * First check to see if we're behind a proxy server using the 
+	 * X-Forwarded-For header, then fall back to the regular 
+	 * $_SERVER['REMOTE_ADDR'] global variable
+	 *
+	 * @uses $_SERVER
+	 * @uses preg_match()
+	 * @return string Client IP address as dotted quad
+	 */
+	function ip() {
+
+		// Get actual client IP in case we're behind a proxy
+		if (isset($_SERVER["HTTP_X_FORWARDED_FOR"]) && !empty($_SERVER["HTTP_X_FORWARDED_FOR"])) $remoteIP = $_SERVER["HTTP_X_FORWARDED_FOR"];
+		elseif (isset($_SERVER["REMOTE_ADDR"])) $remoteIP = $_SERVER["REMOTE_ADDR"];
+		else $remoteIP = "0.0.0.0";
+
+		// Basic IP address format checking since X-Forwarded-For can be
+		// spoofed (it's just a header in the HTTP request)
+		$remoteIP = trim($remoteIP);
+		if (!preg_match("/^([\d]{1,3}\.){3}[\d]{1,3}$/", $remoteIP)) $remoteIP = "0.0.0.0";
+
+		return $remoteIP;
+	}
+
 ?>

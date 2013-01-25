@@ -39,4 +39,8 @@ matches the setting in your `config.local.inc.php` file) and run the install scr
 
 Hit me up: http://codedealers.com/contact/
 
+Copyright Crap & License
+------------------------
+Plant is copyright 2007 Ivo Janssen and released under the GNU General Public License version 3 (the "License"). You may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at http://www.gnu.org/licenses/gpl-3.0.txt
+
 Now scram.

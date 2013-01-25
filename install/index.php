@@ -43,66 +43,38 @@
 		<meta name="copyright" content="Copyright 2007-present Ivo KH Janssen, Code Dealers" />
 		<link rel="stylesheet" href="/app/css/main.css" type="text/css" />
 	</head>
-	<body>
+	<body class="install">
 		<h1>Plant</h1>
 		
 		<div id="wrapper">
 			
 			<h2>Plant Installation</h2>
 			
-			<p>	
-				<?php		
-				try {
-					
-					// Check for existence
-					if (DB::exists() && Model::storageExists("path") && Model::getAll("path", "path.path = '/'")) throw new Exception("You've already installed Plant! Please remove the /install/ directory on your server!");
-					
-					// Create database
-					print "Attemping to create main storage...<br/>";
-					if (DB::create()) print "- main storage created...<br/>";
-					
-					// Create tables
-					print "Creating Structures...<br/>";
-					createStorage("controller");
-					createStorage("path");
-					createStorage("plugin");
-					createStorage("usergroup");
-					createStorage("user");
-					
-					// Create link tables
-					print "Creating Link Structures...<br/>";
-					createStorageLink("path", "usergroup");
-					
-					// Create admin password
-					$pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
-					$generatedPassword  = "";
-					for($i = 1; $i < 10; $i++) {
-						$generatedPassword .= $pattern{rand(0,35)};
-					}
-					$passwordHash = sha1($generatedPassword . config("LOGIN_PASSWORD_SALT"));
-					
-					// Insert initial data
-					print "Inserting Initial Data...<br/>";
-					if (Model::loadFile(config("INITIAL_DATA_FILE"), array("password" => $passwordHash, "email" => "enter@youremail.here"))) print "All initial data successfully created...<br/>";
-					
-					?>
-					</p>
-					<h3>Installation complete!</h3>
-					<p>Login to <a href="<?= config("REMOTE_SITE_ROOT") ?>siteadmin/">the admin</a> with the following info:</p>
-					<ul>
-						<li>Username: <code>admin</code></li>
-						<li>Password: <code><?= $generatedPassword ?></code></li>
-					</ul>
-					<h3>Note or copy this password as it will not be given again!</h3>
-					<?php
-					
-				}
-				catch (Exception $e) {
-					print "An error occurred: " . $e->getMessage() . "<br/>";
-				}
-				
+			<?php
+			$result = install();
+			?>
+			
+			<ul>
+			<?php
+			foreach($result["log"] as $message) {
+				?><li><?= $message ?></li><?php
+			}
+			?>
+			</ul>
+			
+			<?php
+			if ($result["success"]) {
 				?>
-			</p>
+				<h3>Installation complete!</h3>
+				<p>Login to <a href="<?= config("REMOTE_SITE_ROOT") ?>siteadmin/">the admin</a> with the following info:</p>
+				<ul>
+					<li>Username: <code>admin</code></li>
+					<li>Password: <code><?= $result["password"] ?></code></li>
+				</ul>
+				<h3>Note or copy this password as it will not be given again!</h3>	
+				<?php
+			}
+			?>
 			
 		</div>
 		
@@ -116,15 +88,16 @@
 	 * Displays custom status messages and catches errors for good reporting.
 	 *
 	 * @param string $type Model type to create storage for
-	 * @return void
+	 * @return string log message
 	 * @uses Model::createStorage()
 	 */
 	function createStorage($type) {
 		try {
-			if (Model::createStorage($type)) print "-" . $type . " storage created<br/>";
+			if (Model::createStorage($type)) return $type . " storage created!";
+			throw new Exception("Model::createStorage() failed!");
 		}
 		catch (Exception $e) {
-			print "<strong>WARNING!</strong> " . $e->getMessage() . "<br/>";
+			return "<strong>WARNING!</strong> " . $e->getMessage();
 		}
 	}
 	
@@ -135,16 +108,69 @@
 	 *
 	 * @param string $typeA Model A of link to create storage for
 	 * @param string $typeB Model B of link to create storage for
-	 * @return void
+	 * @return string log message
 	 * @uses LinkModel::createStorage()
 	 */
 	function createStorageLink($typeA, $typeB) {
 		try {
-			if (LinkModel::createStorage($typeA, $typeB)) print "-" . $typeA . "/" . $typeB . " storage link created<br/>";
+			if (LinkModel::createStorage($typeA, $typeB)) return $typeA . "/" . $typeB . " storage link created";
+			throw new Exception("LinkModel::createStorage() failed!");
 		}
 		catch (Exception $e) {
-			print "<strong>WARNING!</strong> " . $e->getMessage() . "<br/>";
+			return "<strong>WARNING!</strong> " . $e->getMessage();
 		}
+	}
+	
+	/**
+	 * Main installation function
+	 *
+	 * @return array log messages
+	 */
+	function install() {
+	
+		$results = array("success" => false);
+		try {
+					
+			// Check for existence
+			if (DB::exists() && Model::storageExists("path") && Model::getAll("path", "path.path = '/'")) throw new Exception("You've already installed Plant! Please remove the /install/ directory on your server!");
+			
+			// Create database
+			$log[] = "Attemping to create main storage...";
+			if (DB::create()) $log[] = "Main storage created!";
+			
+			// Create tables
+			$log[] = "Creating Structures...";
+			foreach(array("controller", "path", "plugin", "usergroup", "user") as $model) {
+				$log[] = createStorage($model);
+			}
+			
+			// Create link tables
+			$log[] = "Creating Link Structures...";
+			$log[] = createStorageLink("path", "usergroup");
+			
+			// Create admin password
+			$pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
+			$generatedPassword  = "";
+			for($i = 1; $i < 10; $i++) {
+				$generatedPassword .= $pattern{rand(0,35)};
+			}
+			$passwordHash = sha1($generatedPassword . config("LOGIN_PASSWORD_SALT"));
+			
+			// Insert initial data
+			$log[] = "Inserting Initial Data...";
+			if (Model::loadFile(config("INITIAL_DATA_FILE"), array("password" => $passwordHash, "email" => "enter@youremail.here"))) $log[] = "All initial data successfully created...";
+			
+			$results["success"] = true;
+			$results["password"] = $generatedPassword;
+			
+		}
+		catch (Exception $e) {
+			$log[] = "An error occurred: " . $e->getMessage();
+		}
+		
+		$results["log"] = $log;
+		return $results;
+		
 	}
 	
 	/**

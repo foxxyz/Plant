@@ -11,6 +11,8 @@ http://codedealers.com
 
 */
 
+@import url(http://fonts.googleapis.com/css?family=Dosis|Raleway);
+
 /******************\
 | GENERAL STYLES   |
 \******************/
@@ -39,7 +41,7 @@ http://codedealers.com
 body {
 	background: #fff;
 	color: #666;
-	font-family: Tahoma, sans-serif;
+	font-family: "Raleway", sans-serif;
 	font-size: 16px;
 }
 
@@ -92,21 +94,20 @@ h1 {
 
 h2 {
 	font-weight: normal;
+	font-family: "Dosis", sans-serif;
 	text-transform: lowercase;
-	font-family: "Century Gothic", Verdana, sans-serif;
 	font-size: 60px;
-	background-color: #94C890;
-	color: white;
+	color: black;
 	padding: 2px 30px 10px;
 	margin-bottom: 20px;
-	text-align: center;
 }
 
 h3 {
+	font-family: "Dosis", sans-serif;
+	color: black;
+	text-transform: lowercase;
 	font-size: 24px;
 	font-weight: normal;
-	margin-bottom: 0;
-	margin-top: 25px;
 	padding-left: 30px;
 }
 
@@ -183,7 +184,7 @@ ul {
 
 #wrapper {
 	width: 700px;
-	margin-left: 100px;
+	margin-left: 80px;
 	padding-top: 40px;
 }
 
@@ -191,3 +192,13 @@ ul {
 | CLASS SPECIFICS  |
 \******************/
 
+	.install ul {
+		list-style: none;
+		margin-left: 0;
+	}
+	
+		.install li:before {
+			content: '> ';
+			color: #000;
+			font-weight: bold;
+		}

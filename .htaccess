@@ -1,0 +1,8 @@
+Options +FollowSymLinks 
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .* - [L]
+
+RewriteRule ^(([a-z0-9_\+\.\-]/?)*)$ /index.php?path=$1 [QSA,NC,L]

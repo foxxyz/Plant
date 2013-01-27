@@ -1,13 +1,15 @@
 /*
 Plant Stylesheet
 
-URL: 		TBA
+URL: 			TBA
 Created by: 	Foxxyz/Ivo KH Janssen
-For:		The Code Dealers
-		The Plant System
+For:			The Code Dealers
+				The Plant System
 Site Design by:	The Code Dealers
 		
 http://codedealers.com
+
+When creating your site, empty this file and start filling it with your own styles!
 
 */
 
@@ -28,7 +30,7 @@ http://codedealers.com
 	}
 	
 	a:visited {
-		color: #DCBDA8;
+		color: #888;
 		background-color: inherit;
 	}
 	
@@ -40,7 +42,7 @@ http://codedealers.com
 
 body {
 	background: #fff;
-	color: #666;
+	color: #797;
 	font-family: "Raleway", sans-serif;
 	font-size: 16px;
 }
@@ -56,9 +58,24 @@ fieldset {
 	padding: 10px 30px;
 }
 
-	fieldset div {
+	form div {
 		margin-bottom: .5em;
 		clear: both;
+		position: relative;
+	}
+
+footer {
+	padding-top: 1em;
+	font-size: .7em;
+	color: #ccc;
+	background-color: inherit;
+	margin-top: 3em;
+	margin-left: 30px;
+	clear: both;
+}
+
+	footer a:link, footer a:visited {
+		color: inherit;
 	}
 
 	form input, form select {
@@ -72,16 +89,23 @@ fieldset {
 			border-style: inset;
 		}
 
-	form .submit {
-		overflow: auto;
-		margin-top: 10px;
-	}
-
-		form .submit input {
+		form input[type=submit] {
 			margin-left: 30px;
-			font-size: 14px;
-			border: 1px outset;
+			font-size: 16px;
+			padding: 5px 10px;
+			border: 0;
+			border-top: solid 1px #fff;
+			background: -webkit-linear-gradient(top, #fff, #797);
+			background: -moz-linear-gradient(top, #fff, #797);
+			border-radius: 6px;
+			font-family: Raleway, sans-serif;
 		}
+
+			form input[type=submit]:hover {
+				background: -webkit-linear-gradient(top, #797, #fff);
+				background: -moz-linear-gradient(top, #797, #fff);
+				border-top: inset 1px #ccc;
+			}
 
 legend {
 	display: none;
@@ -103,10 +127,9 @@ h2 {
 }
 
 h3 {
-	font-family: "Dosis", sans-serif;
 	color: black;
 	text-transform: lowercase;
-	font-size: 24px;
+	font-size: 26px;
 	font-weight: normal;
 	padding-left: 30px;
 }
@@ -117,6 +140,8 @@ h3 {
 
 h4 {
 	margin: .5em 0;
+	color: black;
+	font-weight: normal;
 }
 
 h5 {
@@ -149,13 +174,7 @@ ul, ol {
 	margin-bottom: 1em;
 }
 
-ul {
-	list-style: square;
-}
-
 	ol li, ul li {
-		color: #797;
-		background-color: inherit;
 		font-size: 14px;
 	}
 	
@@ -172,16 +191,6 @@ ul {
 | ID SPECIFICS     |
 \******************/
 
-#footer {
-	padding-top: 1em;
-	font-size: .7em;
-	color: #ccc;
-	background-color: inherit;
-	margin-top: 1em;
-	margin-left: 0;
-	clear: both;
-}
-
 #wrapper {
 	width: 700px;
 	margin-left: 80px;
@@ -191,6 +200,21 @@ ul {
 /******************\
 | CLASS SPECIFICS  |
 \******************/
+
+	p.error, .error p {
+		color: #fff;
+		background-color: #f44;
+		border-radius: 6px;
+		padding: 5px 10px;
+		box-shadow: 3px 2px 3px #888;
+		display: inline-block;
+	}
+
+	.error p {
+		position: absolute;
+		top: -20px;
+		left: 200px;
+	}
 
 	.install ul {
 		list-style: none;
@@ -202,3 +226,11 @@ ul {
 			color: #000;
 			font-weight: bold;
 		}
+		
+	.login input {
+		font-size: 26px  
+	}
+		
+	.login label {
+		display:none;
+	}

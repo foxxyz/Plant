@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-	$(".delete").click(function(){
-		return confirm("Are you sure you wanna do this?");
+	$("[data-confirm]").click(function(){
+		return confirm($(this).data("confirm").replace(/\\n/g, "\n"));
 	});
 	
 });

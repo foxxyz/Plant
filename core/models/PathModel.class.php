@@ -17,7 +17,7 @@
 	 * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
 	 * @package plant_core
 	 * @subpackage models
-	 * @version 1.3
+	 * @version 1.4
 	 */
 	class PathModel extends EditableModel {
 		
@@ -246,41 +246,62 @@
 				}
 			}
 			
-			// Get main action parameters
-			$parameters = "";
-			$pathController = new ReflectionClass(get_class($this->getController()));
-			foreach($pathController->getMethod("actionMain")->getParameters() as $parameter) {
-				if ($parameter->isOptional()) $parameters .= "(" . strtolower($parameter->getName()) . ")/";
-				else $parameters .= strtolower($parameter->getName()) . "/";
+			try {
+				// Get main action parameters
+				$mainParameters = array();
+				if ($pathController = $this->getController()) {
+					$pathControllerReflection = new ReflectionClass(get_class($pathController));
+					foreach($pathControllerReflection->getMethod("actionMain")->getParameters() as $parameter) {
+						if ($parameter->isOptional()) $mainParameters[] = "(" . strtolower($parameter->getName()) . ")";
+						else $mainParameters[] = strtolower($parameter->getName());
+					}
+				}
+				
+				// Get other actions
+				$actions = array();
+				foreach($this->getControllerModel()->getControllerMethods() as $actionMethod) {
+					if ($actionMethod->getName() == "actionMain") continue;
+					$parameters = array();
+					foreach($actionMethod->getParameters() as $parameter) {
+						if ($parameter->isOptional()) $parameters[] = "(" . strtolower($parameter->getName()) . ")";
+						else $parameters[] = strtolower($parameter->getName());
+					}
+					$action = array(
+						"path"			=>	$previousPath . trim($this->getPath(), "/") . "/" . str_replace("_", "-", strtolower(substr($actionMethod->getName(), strlen(config("ACTION_METHOD_PREFIX"))))) . "/",
+						"parameters"	=>	$parameters ? implode("/", $parameters) . "/" : "",
+					);
+					$actions[] = $action;
+				}
+			}
+			catch(Exception $e) {
+				$error = $e->getMessage();
 			}
 			
 			// Now show some HTML
 			?>
 			<span class="list-item-text">
-				<a href="<?= $previousPath ?><?= trim($this->getPath(), "/") ?>/"><?= $previousPath ?><?= $this->getPath() == "/" ? "Root" : $this->getPath() . "/" ?></a><?= $parameters ? "<span class=\"actionslist\">" . $parameters . "</span>" : null ?>
+				<a href="<?= $previousPath ?><?= trim($this->getPath(), "/") ?>/"><?= $previousPath ?><?= $this->getPath() == "/" ? "Root" : $this->getPath() . "/" ?></a><?= $mainParameters ? "<span class=\"actionslist\">" . implode("/", $mainParameters) . "</span>" : null ?>
+				<?php
+				if (isset($error)) {
+					?><span class="error"><?= $error ?></span><?php
+				}
+				?>
 			</span>
 			<h5>Actions</h5>
 			<ul class="actions">
 				<li class="add"><a href="add/<?= $this->getID() ?>/" title="Add a new child path to this one">Add Section</a></li>
 				<li class="add"><a href="addaction/<?= $this->getID() ?>/" title="Add a new child action to this path">Add Action</a></li>
 				<li class="edit"><a href="edit/<?= $this->getID() ?>/" title="Edit this path">Edit</a></li>
-				<li class="delete"><a href="delete/<?= $this->getID() ?>/" title="Delete this path">Delete</a></li>
+				<li class="delete"><a data-confirm="Delete this entire path?" href="delete/<?= $this->getID() ?>/" title="Delete this path">Delete</a></li>
 			</ul>
 			<?php			
-			if ($actions = $this->getControllerModel()->getControllerMethods()) {
+			if (isset($actions) && $actions) {
 				?>
 				<ul class="actionslist">
 				<?php
-				foreach($actions as $actionMethod) {
-					if ($actionMethod->getName() == "actionMain") continue;
-					$actionPath = $previousPath . trim($this->getPath(), "/") . "/" . str_replace("_", "-", strtolower(substr($actionMethod->getName(), strlen(config("ACTION_METHOD_PREFIX"))))) . "/";
-					$parameters = "";
-					foreach($actionMethod->getParameters() as $parameter) {
-						if ($parameter->isOptional()) $parameters .= "(" . strtolower($parameter->getName()) . ")/";
-						else $parameters .= strtolower($parameter->getName()) . "/";
-					}
+				foreach($actions as $action) {
 					?>
-					<li><a href="<?= $actionPath ?>"><?= $actionPath ?></a><?= $parameters ?></li>
+					<li><a href="<?= $action["path"] ?>"><?= $action["path"] ?></a><?= $action["parameters"] ?></li>
 					<?php
 				}
 				?>

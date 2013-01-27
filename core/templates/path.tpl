@@ -3,7 +3,7 @@
 <?= $this->showStatusMessages() ?>
 <?= $this->showErrorMessages() ?>
 
-<span class="actionstoggle">Show Actions</span>
+<?= $form->button("Show Actions", "actionstoggle") ?>
 
 <ul id="pathlist" class="actionlist">
 	<li class="pathcontainer">

@@ -10,8 +10,7 @@ $(document).ready(function(){
 	
 	// Shows new controller textbox if "new" is selected on the controller select	
 	$("#path_controller_id").change(function(){
-		if ($("#path_controller_id option:selected").val() == "new") $("#make_new_controller").show();
-		else $("#make_new_controller").hide();
+		triggerControllerBox();
 	});
 	
 	// Changes the pre-path label to the selected parent path
@@ -28,17 +27,36 @@ $(document).ready(function(){
 		// Set selected controller
 		$("#action_controller option[value='" + $(this).children("option:selected").attr("value") + "']").attr("selected", "selected");
 		// Call path change
-		$("#action_path").keyup();		
+		showTemplateName();
 		
 	});
 	
 	// Changes the template name that gets generated
-	$("#action_path").keyup(function() {
-		
-		if (!$(this).attr("value")) return false;
-		
+	$("#action_path").on("keyup", showTemplateName);
+	
+	// Action lists toggle
+	$(".path .actionslist").hide();
+	$(".path #actionstoggle").click(function(){
+		if ($(".actionslist:visible").length) {
+			$(".actionslist").hide();
+			$(this).val("Show Actions");
+		}
+		else {
+			$(".actionslist").show();
+			$(this).val("Hide Actions");
+		}
+	});
+	
+	triggerControllerBox();
+	showTemplateName();
+	
+});
+
+function showTemplateName() {
+	
 		// Get action name
-		actionName = $(this).attr("value").replace(/[^a-z0-9-]/g, "")
+		if (!$("#action_path").length) return false;
+		actionName = $("#action_path").val().replace(/[^a-z0-9-]/g, "")
 		if (!actionName) return false;
 	
 		// Get selected controller
@@ -50,18 +68,9 @@ $(document).ready(function(){
 		// Set in HTML
 		$("#action_template_generate_container label").text("Generate template (" + templateName + ")");		
 		
-	});
-	
-	// Action lists toggle
-	$(".path .actionslist").hide();
-	$(".path .actionstoggle").click(function(){
-		if ($(".actionslist:visible").length) {
-			$(".actionslist").hide();
-			$(this).text("Show Actions");
-		}
-		else {
-			$(".actionslist").show();
-			$(this).text("Hide Actions");
-		}
-	});
-});
+}
+
+function triggerControllerBox() {
+	if ($("#path_controller_id option:selected").val() == "new") $("#make_new_controller").show();
+	else $("#make_new_controller").hide();
+}

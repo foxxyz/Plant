@@ -11,13 +11,13 @@ if (isset($controllers)) {
 			<th>Name</th>
 			<th>Actions Present</th>
 			<th>Usage</th>
+			<th>Actions</th>
 		</tr>
 		<?php
-		$altCounter = 0;
 		foreach($controllers as $controller) {
 			$paths = $controller->getPaths();
 			?>
-			<tr<?= $altCounter++ % 2 == 0 ? " class=\"alternate\"" : null ?>>
+			<tr>
 				<td><?= $controller->getControllerName() ?></td>
 				<td>
 					<ul>
@@ -31,6 +31,7 @@ if (isset($controllers)) {
 					</ul>
 				</td>
 				<td><?= $paths ? count($paths) : "0" ?> path<?= $paths && count($paths) == 1 ? null : "s" ?></td>
+				<td class="delete"><a href="delete/<?= $controller->getID() ?>/" data-confirm="Delete this controller reference?">Delete</a></td>
 			</tr>
 			<?php
 		}

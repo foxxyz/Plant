@@ -14,7 +14,7 @@ if (isset($groups) && $groups) {
 				<span class="list-item-text"><a href="edit/<?= $group->getID() ?>/" title="Edit this group"><?= $group->getName() ?></a> (<?= ($usercount = $group->getUserCount()) == 1 ? "1 user" : $usercount . " users" ?>)</span>
 				<h5>Actions</h5>
 				<ul class="actions">
-					<li class="delete"><a href="delete/<?= $group->getID() ?>/" title="Delete this group">Delete</a></li>
+					<li class="delete"><a data-confirm="Delete this entire group?\n\nNotice: If there are users in this group, you will prompted what to do with them." href="delete/<?= $group->getID() ?>/" title="Delete this group">Delete</a></li>
 				</ul>
 			</li>
 			<?php

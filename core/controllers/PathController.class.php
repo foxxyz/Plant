@@ -17,7 +17,7 @@
 	 * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
 	 * @package plant_core
 	 * @subpackage controllers
-	 * @version 1.4
+	 * @version 1.5
 	 */
 	class PathController extends EditingController {
 		
@@ -92,7 +92,7 @@
 						else $this->setErrorMessage("Action could not be created!");
 					}
 					catch(Exception $e) {
-						$this->setErrorMessage("I'm sorry, I couldn't add that action! Here's why: " . $e->getMessage());
+						$this->setErrorMessage($e->getMessage());
 					}
 					
 					
@@ -139,48 +139,55 @@
 			// Check for a post request
 			if ($this->get("path_submit") && $this->validateForm($action, $pathToEdit) && $this->form->validate()) {
 				
-				// If new, create a new path
-				if ($isNew) $pathToEdit = new PathModel();
-																				
-				// Get path data
-				$data = array();
-				foreach (array_keys($_REQUEST) as $key) {
-					if (strpos($key, "path_") === 0) $data[substr($key, 5)] = $this->get($key);
-				}
-				
-				// If new controller is selected, create it
-				if ($data["controller_id"] == "new") {
-					$newController = new ControllerModel();
-					// Make name
-					$newControllerName = ucfirst(strtolower($data["new_controller_name"])) . "Controller";
-					$newController->edit($newControllerName);
-					$data["controller_id"] = $newController->getID();
-				}
-						
-				// Set root values if editing root
-				if ($pathToEdit->getParentID() === "0") {
-					$data["parentID"] = 0;
-					$data["path"] = "/";
-				}
-							
-				// Get access groups
-				$accessGroups = array();
-				if ($this->get("path_authentication_required") && $userGroups = Model::getAll("usergroup")) {
-					foreach($userGroups as $userGroup) {
-						if ($this->get("path_usergroup_" . $userGroup->getMemberName())) $accessGroups[] = $userGroup;
+				try {
+					// If new, create a new path
+					if ($isNew) $pathToEdit = new PathModel();
+																					
+					// Get path data
+					$data = array();
+					foreach (array_keys($_REQUEST) as $key) {
+						if (strpos($key, "path_") === 0) $data[substr($key, 5)] = $this->get($key);
 					}
+					
+					// If new controller is selected, create it
+					if ($data["controller_id"] == "new") {
+						$newController = new ControllerModel();
+						// Make name
+						$newControllerName = ucfirst(strtolower($data["new_controller_name"])) . "Controller";
+						$newController->edit($newControllerName);
+						$data["controller_id"] = $newController->getID();
+					}
+							
+					// Set root values if editing root
+					if ($pathToEdit->getParentID() === "0") {
+						$data["parentID"] = 0;
+						$data["path"] = "/";
+					}
+								
+					// Get access groups
+					$accessGroups = array();
+					if ($this->get("path_authentication_required") && $userGroups = Model::getAll("usergroup")) {
+						foreach($userGroups as $userGroup) {
+							if ($this->get("path_usergroup_" . $userGroup->getMemberName())) $accessGroups[] = $userGroup;
+						}
+					}
+					$data["usergroup"] = $accessGroups;
+					
+					// Edit the path
+					$pathToEdit->edit($data);
 				}
-				$data["usergroup"] = $accessGroups;
+				catch(Exception $e) {
+					$this->setErrorMessage($e->getMessage());
+				}
 				
-				// Edit the post
-				if (!$this->hasErrorMessages() && $pathToEdit->edit($data)) {
+				if (!$this->hasErrorMessages()) {
 					if ($isNew) $this->setStatusMessage("New path successfully created!");
 					else $this->setStatusMessage("Path '" . $pathToEdit->getPath() . "' successfully edited.");
 					Headers::redirect($this->getPath());
 				}
 				else {
-					if ($isNew) $this->setErrorMessage("The path couldn't be created. Check below to see why...");
-					else $this->setErrorMessage("The path couldn't be edited. Check below to see why...");
+					if ($isNew) $this->setErrorMessage("The path couldn't be created.");
+					else $this->setErrorMessage("The path couldn't be edited.");
 				}		
 				
 			}
@@ -336,7 +343,10 @@
 				$this->form->set("path_parent", $model->getParentID());
 				$this->form->set("path_path", $model->getPath());
 				$this->form->set("path_title", $model->getTitle());
-				$this->form->set("path_controller_id", $model->getControllerModel()->getID());
+				try {
+					$this->form->set("path_controller_id", $model->getControllerModel()->getID());
+				}
+				catch(Exception $e) {}
 				if ($pathAccessGroups = $model->getAccessGroups()) {
 					foreach($pathAccessGroups as $pathAccessGroup) $this->form->set("path_usergroup_" . $pathAccessGroup->getMemberName());
 				}

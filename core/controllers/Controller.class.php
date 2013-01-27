@@ -28,7 +28,7 @@
 	 * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
 	 * @package plant_core
 	 * @subpackage controllers
-	 * @version 3.9
+	 * @version 3.91
 	 * @uses ACTION_METHOD_PREFIX Prefix prepended to every action method (usually 'action')
 	 * @uses APP_ROOT Application root path
 	 * @uses DEFAULT_ACTION_NAME Name for the default action of a controller (usually 'main')
@@ -781,7 +781,7 @@
 			
 			// Write it to the template directory
 			$templateFilename = config("APP_ROOT") . config("TEMPLATE_DIR") . $this->convertTemplateName(config("TEMPLATE_DEFAULT_FORMAT")) . "." . config("TEMPLATE_EXTENSION");
-			if (@file_put_contents($templateFilename, $templateGuide) === false) throw new Exception("New template could not be created! Be sure that the permissions are set correctly for the directory containing the templates.");
+			if (@file_put_contents($templateFilename, $templateGuide) === false) throw new Exception("New template could not be created! Be sure that the directory containing the templates (<code>" . config("APP_ROOT") . config("TEMPLATE_DIR") . "</code>) has write permissions.");
 			
 			// CHMOD it so regular users have access too
 			chmod($templateFilename, 0664);

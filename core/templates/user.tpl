@@ -60,7 +60,7 @@ if (isset($users)) {
 					?>
 					<h5>Actions</h5>
 					<ul class="actions">
-						<li class="delete"><a href="delete/<?= $siteUser->getID() ?>/" title="Delete this user">Delete</a></li>
+						<li class="delete"><a data-confirm="Delete this user?" href="delete/<?= $siteUser->getID() ?>/" title="Delete this user">Delete</a></li>
 					</ul>
 					<?php
 				}

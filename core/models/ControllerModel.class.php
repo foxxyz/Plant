@@ -17,7 +17,7 @@
 	 * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
 	 * @package plant_core
 	 * @subpackage models
-	 * @version 1.0
+	 * @version 1.1
 	 * @uses ACTION_METHOD_PREFIX Prefix for action methods in Controllers
 	 * @uses APP_ROOT
 	 * @uses CONTROLLER_DIR Directory in which controllers are stored (usually 'controllers/')
@@ -89,11 +89,11 @@
 			// Check arguments
 			if (!is_string($name) || empty($name)) throw new Exception("Controller name must be a valid string!");
 			
-			// Make sure this controller doesn't already exist
-			try {
-				if (!$this->getID() && class_exists($name)) $this->setErrorMessage("Can't create controller... A controller with that name already exists!", "path_new_controller_name");
-			}
-			catch (Exception $e) {}
+			// Make sure controller model doesn't already exist
+			if (!$this->getID() && Model::getAll("controller", "controller.name = '" . DB::escape($name) . "'")) throw new Exception("Controller '" . $name . "' already exists!");
+			
+			// Create controller file if it doesn't exist
+			if (!class_exists($name)) $this->createController();
 			
 			// Set the vars
 			$this->name = Filter::it($name);
@@ -102,7 +102,7 @@
 			if ($this->hasErrorMessages()) return false;
 			
 			// If new controller, create a new controller class and insert the model
-			if (!$this->getID() && $this->createController()) return $this->insert();
+			if (!$this->getID()) return $this->insert();
 			// Else, update the controller class and update the model
 			return $this->update();
 			
@@ -206,7 +206,7 @@
 			
 			// Write it to the controller directory
 			$controllerFilename = config("APP_ROOT") . config("CONTROLLER_DIR") . $name . ".class.php";
-			if (@file_put_contents($controllerFilename, $controllerGuide) === false) throw new Exception("New controller could not be created! Be sure that the permissions are set correctly for the directory containing the Controllers.");
+			if (@file_put_contents($controllerFilename, $controllerGuide) === false) throw new Exception("New controller could not be created! Be sure that the directory containing the Controllers (<code>" . config("APP_ROOT") . config("CONTROLLER_DIR") . "</code>) has write permissions.");
 			
 			// CHMOD it so regular users have access too
 			chmod($controllerFilename, 0664);

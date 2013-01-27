@@ -14,7 +14,7 @@
 	 */
 	 
 	 // Crash message to display on fatal error or exception
-	do_define("ERROR_CRASH_MESSAGE", "<p id=\"serious-error\" class=\"error\" style=\"font-size: 36px; text-align: center;\">Oh my. Looks like something went really wrong. Sorry!</p>");
+	do_define("ERROR_CRASH_MESSAGE", "<p id=\"serious-error\" class=\"error\" style=\"text-align: center;\"><span style=\"font-size: 36px;\">Ouch, unrecoverable error! Sorry!</span><br/>The webmaster has been notified, so hopefully we can fix it soon!</p>");
 	
 	// Path to error log
 	do_define("ERROR_LOG_PATH", "plugins/logger/error.log");

@@ -56,7 +56,7 @@
 			
 			// JS
 			$this->removeJavascripts();
-			$this->setJavascript("jquery");
+			$this->setJavascript("//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js");
 			// Set JS to fix PNGs for IE < 7
 			$this->setJavascript("pngfix", "defer", "lt IE 7");
 			$this->setJavascript("admin");

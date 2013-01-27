@@ -557,7 +557,7 @@
 		protected function setJavascript($filename, $defer = false, $condition = false) {
 			
 			// Autofind javascript if not full path given
-			if (strpos($filename, "http://") !== false) $foundFile = $filename;
+			if (strpos($filename, "//") !== false) $foundFile = $filename;
 			else $foundFile = autoFind($filename, "script", "remote") . "?v" . config("SITE_VERSION");
 			
 			// Create javascript array with script path

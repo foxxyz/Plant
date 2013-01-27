@@ -17,11 +17,11 @@ Installing
 
 1. Run `git clone https://github.com/foxxyz/Plant` for a fresh copy.
 2. Modify `config.local.inc.php` in the `app/config/` directory and fill in the details of your database connection.
-3. Set write permissions on the following directories so Plant can write and access data:
+3. Set write permissions on the following files & directories so Plant can write and access data:
 	* `/app/controllers/`
 	* `/app/templates/`
 	* `/core/cache/`
-	* `/content/`
+	* `/plugins/logger/error.log`
 4. Load `/install/` on your website. Follow the steps, and note the generated password at the end.
 5. Delete the `/install/` directory on your server.
 

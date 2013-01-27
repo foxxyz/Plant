@@ -153,7 +153,7 @@
 	define("FRAMEWORK_NAME", "Plant");
 	
 	// Version of this framework
-	define("FRAMEWORK_VERSION", "1.0");
+	define("FRAMEWORK_VERSION", "1.1");
 	
 	// Guide extension
 	define("GUIDE_EXTENSION", "guide");

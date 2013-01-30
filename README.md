@@ -30,6 +30,16 @@ That's it! The installation script will send you to the Site Admin where you'll 
 FAQ
 ---
 
+### Now I have a "Plant" subdirectory on my server? How do I get it in the root?
+
+To clone Plant into the current directory, run `git clone https://github.com/foxxyz/Plant .` instead of the command above (just make sure the directory is empty).
+
+### How do I set write permissions on those directories?
+
+Assuming your web server runs with group privileges, an easy way to do this is to run the following command from your site root:
+
+`chmod g+w app/controllers/ app/templates/ core/cache/ plugins/logger/error.log`
+
 ### I'm getting Database warnings during the installation?
 
 Make sure your DB user has database creation privileges. If not, create the new database yourself (make sure the name

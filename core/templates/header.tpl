@@ -10,9 +10,8 @@
 		// Loads general <meta name="" content="" /> tags (specify using Controller->setMeta())
 		if (isset($headerVars["meta"])) {
 			foreach ($headerVars["meta"] as $metaName => $metaContent) {
-				?>
-				<meta name="<?= $metaName ?>" content="<?= $metaContent ?>" />
-				<?php
+				?><meta name="<?= $metaName ?>" content="<?= $metaContent ?>" />
+		<?php
 			}
 		}
 		
@@ -25,55 +24,49 @@
 					$conditionalStylesheets[] = $stylesheet;
 					continue;
 				}
-				?>
-				<link rel="stylesheet" type="text/css" media="<?= $stylesheet["media"] ?>" href="<?= $stylesheet["file"] ?>" />
-				<?php
+				?><link rel="stylesheet" type="text/css" media="<?= $stylesheet["media"] ?>" href="<?= $stylesheet["file"] ?>" />
+		<?php
 			}
 			foreach($conditionalStylesheets as $stylesheet) {
-				?>
-				<!--[if <?= $stylesheet["condition"] ?>]>
-					<link rel="stylesheet" type="text/css" media="<?= $stylesheet["media"] ?>" href="<?= $stylesheet["file"] ?>" />
-				<![endif]-->
-				<?php
+				?><!--[if <?= $stylesheet["condition"] ?>]>
+			<link rel="stylesheet" type="text/css" media="<?= $stylesheet["media"] ?>" href="<?= $stylesheet["file"] ?>" />
+		<![endif]-->
+		<?php
 			}
 		}
 		
 		// Loading javascript variables (specify using Controller->setJavascriptVar())
 		if (isset($headerVars["jsVars"])) {
-			?>
-			<script>
-			<?php
+			?><script>
+		<?php
 			foreach($headerVars["jsVars"] as $varName => $varValue) {
-				?>
-				<?= strpos($varName, "[") === false && strpos($varName, ".") === false ? "var " : null ?><?= $varName ?> = <?= $varValue ?>;
-				<?php
+				?>	<?= strpos($varName, "[") === false && strpos($varName, ".") === false ? "var " : null ?><?= $varName ?> = <?= $varValue ?>;
+		<?php
 			}
-			?>
-			</script>
-			<?php
+			?></script>
+		<?php
 		}
 		
 		// Loading javascripts (specify using Controller->setJavascript())
 		if (isset($headerVars["js"])) {
 			foreach ($headerVars["js"] as $jscript) {
-				if (isset($jscript["condition"])) { ?><!--[if <?= $jscript["condition"] ?>]><?php }
-				?>
-				<script <?= isset($jscript["defer"]) ? "defer " : null ?>type="text/javascript" src="<?= $jscript["file"] ?>"></script>
-				<?php
-				if (isset($jscript["condition"])) { ?><![endif]--><?php }
+				if (isset($jscript["condition"])) { ?><!--[if <?= $jscript["condition"] ?>]>
+			<?php }
+				?><script <?= isset($jscript["defer"]) ? "defer " : null ?>type="text/javascript" src="<?= $jscript["file"] ?>"></script>
+		<?php
+				if (isset($jscript["condition"])) { ?><![endif]-->
+		<?php }
 			}
 		}
 		
 		// Loading RSS feeds (specify using Controller->setRSSFeed())
 		if (isset($headerVars["rss"])) {
 			foreach ($headerVars["rss"] as $title => $feed) {
-				?>
-				<link rel="alternate" type="application/rss+xml" title="<?= $title ?>" href="<?= config("REMOTE_SITE_ROOT") ?><?= ltrim($feed, "/") ?>" />
-				<?php
+				?><link rel="alternate" type="application/rss+xml" title="<?= $title ?>" href="<?= config("REMOTE_SITE_ROOT") ?><?= ltrim($feed, "/") ?>" />
+		<?php
 			}
 		}
-		?>
-		<link rel="Shortcut Icon" href="<?= config("REMOTE_SITE_ROOT") ?>favicon.ico" type="image/x-icon" />
+		?><link rel="Shortcut Icon" href="<?= config("REMOTE_SITE_ROOT") ?>favicon.ico" type="image/x-icon" />
 	</head>
 	
-	<body class="<?= $sectionToken ?>">	
+	<body class="<?= $sectionToken ?>">

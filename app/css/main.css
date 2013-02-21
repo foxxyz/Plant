@@ -1,236 +1,304 @@
 /*
 Plant Stylesheet
 
-URL: 			TBA
-Created by: 	Foxxyz/Ivo KH Janssen
-For:			The Code Dealers
-				The Plant System
-Site Design by:	The Code Dealers
-		
+Created by:         Foxxyz/Ivo KH Janssen
+For:                The Code Dealers
+                    The Plant System
+Site Design by:     The Code Dealers
+        
 http://codedealers.com
 
 When creating your site, empty this file and start filling it with your own styles!
 
 */
 
-@import url(http://fonts.googleapis.com/css?family=Dosis|Raleway);
-
-/******************\
-| GENERAL STYLES   |
-\******************/
+@import url(http://fonts.googleapis.com/css?family=Rokkitt|Marcellus+SC);
 
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
-	a:link {
-		color: #729D6D;
-		background-color: inherit;
-	}
-	
-	a:visited {
-		color: #888;
-		background-color: inherit;
-	}
-	
-	a:hover {
-		text-decoration: none;
-		color: black;
-		background-color: inherit;
-	}
+    a:link {
+        color: #729D6D;
+        background-color: inherit;
+    }
+    
+    a:visited {
+        color: #888;
+        background-color: inherit;
+    }
+    
+    a:hover {
+        text-decoration: none;
+        color: black;
+        background-color: inherit;
+    }
+    
+article {
+    padding: 1em 3em;
+    background: -webkit-linear-gradient(top, #F1F3E7, #fff);
+    background: -moz-linear-gradient(top, #F1F3E7, #fff);
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+    border-radius: 16px;
+}
 
 body {
-	background: #fff;
-	color: #797;
-	font-family: "Raleway", sans-serif;
-	font-size: 16px;
+    background: #fff;
+    color: #222;
+    font-family: Rokkitt, serif;
+    font-size: 1em;
 }
 
 code {
-	background-color: inherit;
-	padding: 0 3px;
-	color: #767;
+    background-color: inherit;
+    padding: 0 3px;
+    color: #767;
 }
 
 fieldset {
-	border: none;
-	padding: 10px 30px;
+    border: none;
+    padding: 10px 30px;
 }
 
-	form div {
-		margin-bottom: .5em;
-		clear: both;
-		position: relative;
-	}
+form {
+    margin: 1em 0 2em;
+    text-align: center;
+}
+
+    form div {
+        margin-bottom: .5em;
+        clear: both;
+        position: relative;
+    }
 
 footer {
-	padding-top: 1em;
-	font-size: .7em;
-	color: #ccc;
-	background-color: inherit;
-	margin-top: 3em;
-	margin-left: 30px;
-	clear: both;
+    padding-top: 1em;
+    font-size: .7em;
+    color: #ccc;
+    background-color: inherit;
+    text-align: center;
+    clear: both;
 }
 
-	footer a:link, footer a:visited {
-		color: inherit;
-	}
+    footer a:link, footer a:visited {
+        color: inherit;
+    }
 
-	form input, form select {
-		border: solid .05em #ccc;
-		font-size: 20px;
-		padding: 1px 4px;
+    form input, form select {
+        border: solid .05em #ccc;
+        font-size: 20px;
+        padding: 1px 4px;
 
-	}
+    }
 
-		form input:hover, form select:hover, form input:focus, form select:focus {
-			border-style: inset;
-		}
+        form input:hover, form select:hover, form input:focus, form select:focus {
+            border-style: inset;
+        }
 
-		form input[type=submit] {
-			margin-left: 30px;
-			font-size: 16px;
-			padding: 5px 10px;
-			border: 0;
-			border-top: solid 1px #fff;
-			background: -webkit-linear-gradient(top, #fff, #797);
-			background: -moz-linear-gradient(top, #fff, #797);
-			border-radius: 6px;
-			font-family: Raleway, sans-serif;
-		}
+        form input[type=submit] {
+            font-size: 1.2em;
+            padding: 5px 10px;
+            border: 0;
+            background: linear-gradient(top, #fff, #EBEDDF);
+            background: -webkit-linear-gradient(top, #fff, #EBEDDF);
+            background: -moz-linear-gradient(top, #fff, #EBEDDF);
+            border-radius: 6px;
+            font-family: "Marcellus SC", serif;
+            text-transform: lowercase;
+            box-shadow: 0 0 3px #aaa;
+            cursor: pointer;
+            margin-top: 1em;
+        }
 
-			form input[type=submit]:hover {
-				background: -webkit-linear-gradient(top, #797, #fff);
-				background: -moz-linear-gradient(top, #797, #fff);
-				border-top: inset 1px #ccc;
-			}
+            form input[type=submit]:hover {
+                box-shadow: 0 0 3px #000;
+            }
 
 legend {
-	display: none;
+    display: none;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateY(0);
+        background-image: url(/core/css/images/plant-logo-p.png), linear-gradient(left,#EBEDDF,#fff);
+    }
+    20% {
+        transform: rotateY(360deg);
+        background-image: url(/core/css/images/plant-logo-p.png), linear-gradient(right,#EBEDDF,#fff);
+    }
+    100% { transform: rotateY(360deg); }
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotateY(0);
+        background-image: url(/core/css/images/plant-logo-p.png), -webkit-linear-gradient(left,#EBEDDF,#fff);
+    }
+    20% {
+        -webkit-transform: rotateY(360deg);
+        background-image: url(/core/css/images/plant-logo-p.png), -webkit-linear-gradient(right,#EBEDDF,#fff);
+    }
+    100% { -webkit-transform: rotateY(360deg); }
+}
+
+@-moz-keyframes rotate {
+    0% {
+        -moz-transform: rotateY(0);
+        background-image: url(/core/css/images/plant-logo-p.png), -moz-linear-gradient(left,#EBEDDF,#fff);
+    }
+    20% {
+        -moz-transform: rotateY(360deg);
+        background-image: url(/core/css/images/plant-logo-p.png), -moz-linear-gradient(right,#EBEDDF,#fff);
+    }
+    100% { -moz-transform: rotateY(360deg); }
 }
 
 h1 {
-	background: url(/core/css/images/plant-logo-small.png) no-repeat top right;
-	text-indent: -9999px;
+    width: 100px;    
+    margin: 1em auto 0;
+    height: 100px;
 }
 
+    h1 a {
+        height: 100px;
+        display: block;
+    }
+    
+        h1 span {
+            display: block;
+            background: #EBEDDF url(/core/css/images/plant-logo-p.png) no-repeat center center;
+            height: 92px;
+            border-radius: 50px;
+            color: #fff !important;
+            border: solid 4px #EBEDDF;
+            text-indent: -9999px;
+            animation: rotate 10s 2s linear infinite;
+            transition: background-color .5s ease;
+            -webkit-animation: rotate 10s 2s linear infinite;
+            -webkit-transition: background-color .5s ease;
+            -moz-animation: rotate 10s 2s linear infinite;
+            -moz-transition: background-color .5s ease;
+        }
+        
+        h1 a:hover span {
+            border: double 4px #fff;
+            background-color: #F1F3E7;
+        }
+
 h2 {
-	font-weight: normal;
-	font-family: "Dosis", sans-serif;
-	text-transform: lowercase;
-	font-size: 60px;
-	color: black;
-	padding: 2px 30px 10px;
-	margin-bottom: 20px;
+    font-weight: normal;
+    font-family: "Marcellus SC", serif;
+    font-size: 60px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 h3 {
-	color: black;
-	text-transform: lowercase;
-	font-size: 26px;
-	font-weight: normal;
-	padding-left: 30px;
+    color: #758A3C;
+    text-transform: lowercase;
+    font-size: 26px;
+    font-weight: normal;
+    font-family: "Marcellus SC", serif;
+    margin-top: 1em;
 }
 
-	h3 a {
-		text-decoration: none;
-	}
+    h3:first-child {
+        margin-top: 0;
+    }
+
+    h3 a {
+        text-decoration: none;
+    }
 
 h4 {
-	margin: .5em 0;
-	color: black;
-	font-weight: normal;
+    margin: 0 0 .5em;
+    
+    color: #555;
 }
 
 h5 {
-	font-size: 1em;
+    font-size: 1em;
 }
 
 hr {
-	display: none;
+    display: none;
 }
 
 p {
-	font-size: .8em;
-	margin-bottom: 1em;
-	color: #797;
-	background-color: inherit;
-
-	margin-left: 30px;
+    margin-bottom: 1em;
+    line-height: 1.2em;
 }
 
-	span.explanation {
-		display: block;
-		font-size: .7em;
-		color: #ccc;
-		background-color: inherit;
-	}
+    span.explanation {
+        display: block;
+        font-size: .7em;
+        color: #ccc;
+        background-color: inherit;
+    }
 
 ul, ol {
-	margin-left: 30px;
-	padding-left: 30px;
-	margin-bottom: 1em;
+    margin-left: 1em;
+    margin-bottom: 1em;
 }
 
-	ol li, ul li {
-		font-size: 14px;
-	}
-	
-	ul.changelog {
-		padding: 0;
-		margin-left: 0;
-	}
-	
-		ul.changelog > li {
-			list-style: none;
-		}
-
-/******************\
-| ID SPECIFICS     |
-\******************/
-
+    ol li, ul li {
+        margin-bottom: 1em;
+    }
+    
 #wrapper {
-	width: 700px;
-	margin-left: 80px;
-	padding-top: 40px;
+    max-width: 700px;
+    text-align: center;
+    margin: 0 auto 1em;
 }
+    
+    ul.changelog {
+        padding: 0;
+        margin-left: 0;
+    }
+    
+        ul.changelog > li {
+            list-style: none;
+        }
 
-/******************\
-| CLASS SPECIFICS  |
-\******************/
+    p.error, div.error p {
+        color: #fff;
+        background-color: #f44;
+        border-radius: 6px;
+        padding: 5px 10px;
+        box-shadow: 3px 2px 3px #888;
+        display: inline-block;
+    }
 
-	p.error, div.error p {
-		color: #fff;
-		background-color: #f44;
-		border-radius: 6px;
-		padding: 5px 10px;
-		box-shadow: 3px 2px 3px #888;
-		display: inline-block;
-	}
+    div.error p {
+        position: absolute;
+        top: -20px;
+        right: 100px;
+    }
+    
+    .install article {
+        background: none;
+        text-align: center;
+    }
 
-	div.error p {
-		position: absolute;
-		top: -20px;
-		left: 200px;
-	}
-
-	.install ul {
-		list-style: none;
-		margin-left: 0;
-	}
-	
-		.install li:before {
-			content: '> ';
-			color: #000;
-			font-weight: bold;
-		}
-		
-	.login input {
-		font-size: 26px  
-	}
-		
-	.login label {
-		display:none;
-	}
+    .install ul {
+        list-style: none;
+    }
+    
+        .install li {
+            margin: 0;
+        }
+        
+    .login input {
+        font-size: 1.2em;
+        border-width: .1em;
+        padding: 7px 14px;
+    }
+        
+    .login label {
+        display:none;
+    }

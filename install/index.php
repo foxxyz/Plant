@@ -9,7 +9,7 @@
 	 * @copyright Copyright (c) 2008, Ivo Janssen
 	 * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License, version 3
 	 * @package plant_install
-	 * @version 1.5
+	 * @version 2.0
 	 * @uses INITIAL_DATA_FILE Path to file of data to insert during install
 	 * @uses LOGIN_PASSWORD_SALT Extra string to add to hashing routine for added security
 	 */
@@ -34,48 +34,68 @@
 	catch(DBException $e) {}
 				
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 	<head>
 		<title>Plant Installation</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="author" content="Ivo KH Janssen, http://codedealers.com" />
 		<meta name="copyright" content="Copyright 2007-present Ivo KH Janssen, Code Dealers" />
 		<link rel="stylesheet" href="/app/css/main.css" type="text/css" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script>
+		
+		    $(document).ready(function(){
+		        
+		        delay = 0;
+		        $(".log li, #complete").hide().each(function() {
+		            delay += 200;
+		            $(this).delay(delay).fadeIn();
+		        });
+		       
+		    });
+		    
+		</script>
 	</head>
 	<body class="install">
-		<h1>Plant</h1>
+		<h1><span>Plant</span></h1>
 		
 		<div id="wrapper">
 			
 			<h2>Plant Installation</h2>
 			
-			<?php
-			$result = install();
-			?>
+			<article>
 			
-			<ul>
-			<?php
-			foreach($result["log"] as $message) {
-				?><li><?= $message ?></li><?php
-			}
-			?>
-			</ul>
-			
-			<?php
-			if ($result["success"]) {
-				?>
-				<h3>Installation complete!</h3>
-				<p>Login to <a href="<?= config("REMOTE_SITE_ROOT") ?>siteadmin/">the admin</a> with the following info:</p>
-				<ul>
-					<li>Username: <code>admin</code></li>
-					<li>Password: <code><?= $result["password"] ?></code></li>
-				</ul>
-				<h3>Note or copy this password as it will not be given again!</h3>	
-				<?php
-			}
-			?>
-			
+    			<?php
+    			$result = install();
+    			?>
+    			
+    			<ul class="log">
+    			<?php
+    			foreach($result["log"] as $message) {
+    				?><li><?= $message ?></li><?php
+    			}
+    			?>
+    			</ul>
+    			
+    			<?php
+    			if ($result["success"]) {
+    				?>
+    				<div id="complete">
+        				<h3>Installation complete!</h3>
+        				<p>Login to <a href="<?= config("REMOTE_SITE_ROOT") ?>siteadmin/">the admin</a> with the following info:</p>
+        				<ul>
+        					<li>Username: <code>admin</code></li>
+        					<li>Password: <code><?= $result["password"] ?></code></li>
+        				</ul>
+        				<strong>Note or copy this password as it will not be given again!</strong>
+        			</div>
+    				<?php
+    			}
+    			?>
+    			
+    		</article>
+    			
 		</div>
 		
 	</body>

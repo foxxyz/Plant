@@ -97,8 +97,7 @@
 			// Set meta tags
 			$this->setMeta("generator", config("FRAMEWORK_NAME") . " " . config("FRAMEWORK_VERSION"));
 			$this->setMeta("robots", "all");
-			$this->setMeta("author", "Ivo KH Janssen, http://codedealers.com");
-			$this->setMeta("copyright", "Copyright ©" . date("Y") . " Ivo KH Janssen, Code Dealers");
+			$this->setMeta("author", "Ivo Janssen, http://codedealers.com");
 			if (config("SITE_KEYWORDS")) $this->setMeta("keywords", config("SITE_KEYWORDS"));
 			if (config("SITE_DESCRIPTION")) $this->setMeta("description", config("SITE_DESCRIPTION"));
 			

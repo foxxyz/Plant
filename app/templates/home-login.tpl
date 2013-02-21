@@ -1,4 +1,5 @@
-<h2>Please Login</h2>
+<h2>Please Log In</h2>
+
 <?= $this->showErrorMessages() ?>
 <?= $this->showStatusMessages() ?>
 <form action="<?= $calledURL ?>" method="post">
@@ -14,6 +15,6 @@
 				
 	</fieldset>
 	
-	<?= $form->submitButton("Go already!", "login_submit") ?>
+	<?= $form->submitButton("Come on in", "login_submit") ?>
 		
 </form>

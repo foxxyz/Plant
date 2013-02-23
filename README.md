@@ -1,3 +1,4 @@
+![Plant Logo](http://plant.codedealers.com/core/css/images/plant-logo-p.png)
 Plant
 =====
 
@@ -10,7 +11,7 @@ Requirements
 
 * PHP 5.2 or higher
 * MySQL
-* mod_rewrite or similiar URL rewriting plugin
+* mod_rewrite for nice URLs
 
 Installing
 ----------

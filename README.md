@@ -1,8 +1,9 @@
-![Plant Logo](http://plant.codedealers.com/core/css/images/plant-logo-p.png)
+**⚠️ Plant is past end-of-life status and is no longer under development. Feel free to use this software for any purpose but I no longer provide any support for it.**
+
 Plant
 =====
 
-Plant is a lightweight MVC framework for PHP. My aim was to make building a site fun again, and there are many
+Plant ~~is~~ was a lightweight MVC framework for PHP. My aim was to make building a site fun again, and there are many
 tools included to take a lot of the mundane aspects of web development out of your hands. Plant is primarily aimed
 at experienced web developers looking for a faster way to produce reliable and flexible sites with minimal hassle.
 
@@ -26,7 +27,7 @@ Installing
 4. Load `/install/` on your website. Follow the steps, and note the generated password at the end.
 5. Delete the `/install/` directory on your server.
 
-That's it! The installation script will send you to the Site Admin where you'll be able to change your password and start constructing your site.
+The installation script will send you to the Site Admin where you'll be able to change your password and start constructing your site.
 
 FAQ
 ---
@@ -37,7 +38,7 @@ To clone Plant into the current directory, run `git clone https://github.com/fox
 
 ### How do I set write permissions on those directories?
 
-Assuming your web server runs with group privileges, an easy way to do this is to run the following command from your site root:
+Assuming your web server runs as a separate user, set your site files to that user's group and add group write permissions:
 
 `chmod g+w app/controllers/ app/templates/ core/cache/ plugins/logger/error.log`
 
@@ -46,12 +47,6 @@ Assuming your web server runs with group privileges, an easy way to do this is t
 Make sure your DB user has database creation privileges. If not, create the new database yourself (make sure the name
 matches the setting in your `config.local.inc.php` file) and run the install script again.
 
-### Need more help?
-
-Hit me up: http://codedealers.com/contact/
-
-Copyright Crap & License
+License
 ------------------------
 Plant is copyright 2007 Ivo Janssen and released under the GNU General Public License version 3 (the "License"). You may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at http://www.gnu.org/licenses/gpl-3.0.txt
-
-Now scram.
